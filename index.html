@@ -6,161 +6,77 @@
 <title>PNC Marketing</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #f5f5f4;
-    --card: #ffffff;
-    --border: #e7e5e4;
-    --text: #1c1917;
-    --muted: #78716c;
-    --faint: #a8a29e;
-    --green: #16a34a;
-    --green-light: #dcfce7;
-    --amber: #d97706;
-    --blue: #2563eb;
-    --blue-light: #dbeafe;
-    --purple: #7c3aed;
+    --bg: #f5f5f4; --card: #fff; --border: #e7e5e4; --text: #1c1917;
+    --muted: #78716c; --faint: #a8a29e; --green: #16a34a;
+    --red: #dc2626; --amber: #d97706; --blue: #2563eb; --blue-light: #dbeafe; --purple: #7c3aed;
     --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
   }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    padding: 24px 20px 48px;
-    min-height: 100vh;
-  }
-
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); padding: 24px 20px 48px; min-height: 100vh; }
   .wrap { max-width: 1100px; margin: 0 auto; }
-
   .page-header { margin-bottom: 20px; }
   .page-header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
   .page-header .meta { display: flex; gap: 16px; margin-top: 5px; }
   .page-header .meta span { font-size: 13px; color: var(--muted); }
-
-  .card {
-    background: var(--card);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    margin-bottom: 14px;
-  }
-
+  .card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 14px; }
   .card-head { padding: 14px 16px 11px; border-bottom: 1px solid var(--border); }
   .card-title { font-size: 14px; font-weight: 600; }
   .card-subtitle { font-size: 11px; color: var(--faint); margin-top: 3px; line-height: 1.4; }
-
   .stepper-wrap { padding: 20px 16px 6px; overflow-x: auto; }
   .stepper { display: flex; align-items: flex-start; min-width: 580px; }
-
-  .step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    min-width: 64px;
-  }
-
-  .step-circle {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-    border: 2px solid var(--border);
-    background: var(--card);
-    color: var(--faint);
-    transition: all 0.2s;
-    position: relative;
-    z-index: 1;
-  }
-
-  .step.active .step-circle {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: white;
-    box-shadow: 0 0 0 4px var(--blue-light);
-  }
-
-  .step.complete .step-circle {
-    background: var(--green);
-    border-color: var(--green);
-    color: white;
-  }
-
-  .step-connector {
-    flex: 1;
-    height: 2px;
-    background: var(--border);
-    margin-top: 16px;
-    transition: background 0.2s;
-    min-width: 12px;
-  }
-  .step-connector.done { background: var(--green); }
+  .step { display: flex; flex-direction: column; align-items: center; cursor: pointer; user-select: none; min-width: 64px; }
+  .step-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; border: 2px solid var(--border); background: var(--card); color: var(--faint); transition: all 0.2s; z-index: 1; }
+  .step.active  .step-circle { background: var(--blue);  border-color: var(--blue);  color: white; box-shadow: 0 0 0 4px var(--blue-light); }
+  .step.complete .step-circle { background: var(--green); border-color: var(--green); color: white; }
+  .step-connector { flex: 1; height: 2px; background: var(--border); margin-top: 16px; transition: background 0.2s; min-width: 12px; }
+  .step-connector.done        { background: var(--green); }
   .step-connector.in-progress { background: var(--blue-light); }
-
-  .step-label {
-    font-size: 10px;
-    color: var(--faint);
-    text-align: center;
-    margin-top: 7px;
-    line-height: 1.3;
-    max-width: 72px;
-  }
-  .step-tag { font-size: 9px; color: var(--faint); margin-top: 2px; text-align: center; }
-  .step.active .step-label { color: var(--blue); font-weight: 600; }
-  .step.complete .step-label { color: var(--green); }
-  .step.active .step-tag { color: var(--blue); }
-  .step.complete .step-tag { color: var(--green); }
-
+  .step-label { font-size: 10px; color: var(--faint); text-align: center; margin-top: 7px; line-height: 1.3; max-width: 72px; }
+  .step-tag   { font-size: 9px;  color: var(--faint); text-align: center; margin-top: 2px; }
+  .step.active  .step-label, .step.active  .step-tag  { color: var(--blue);  font-weight: 600; }
+  .step.complete .step-label, .step.complete .step-tag { color: var(--green); }
   .rhythm-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; }
-  .rhythm-col { padding: 14px 16px 16px; }
+  .rhythm-col { padding: 14px 16px 6px; }
   .rhythm-col:not(:last-child) { border-right: 1px solid var(--border); }
-  .rhythm-col-title {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-
-  .rhythm-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 6px 0;
-    border-bottom: 1px solid #fafaf9;
-    cursor: pointer;
-  }
-  .rhythm-item:last-child { border-bottom: none; }
-
-  .rhythm-tick {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-    transition: all 0.15s;
-    font-size: 9px;
-    color: transparent;
-  }
-  .rhythm-item.done .rhythm-tick { background: var(--green); border-color: var(--green); color: white; }
-  .rhythm-item.done .rhythm-item-text { color: var(--faint); }
-
-  .rhythm-item-body { flex: 1; }
-  .rhythm-item-text { font-size: 12px; line-height: 1.4; color: var(--text); transition: color 0.15s; }
-  .rhythm-item-note { font-size: 11px; color: var(--faint); margin-top: 1px; line-height: 1.3; }
-
+  .rhythm-col-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 10px; }
+  .lst-item { display: flex; align-items: flex-start; gap: 6px; padding: 5px 0; border-bottom: 1px solid #fafaf9; }
+  .lst-item:last-of-type { border-bottom: none; }
+  .lst-left  { display: flex; align-items: flex-start; gap: 8px; flex: 1; min-width: 0; cursor: pointer; }
+  .lst-text  { font-size: 12px; line-height: 1.4; color: var(--text); transition: color 0.15s; }
+  .lst-note  { font-size: 11px; color: var(--faint); margin-top: 1px; line-height: 1.3; }
+  .lst-item.done .lst-text { color: var(--faint); }
+  .setup-lst-item { display: flex; align-items: flex-start; gap: 8px; padding: 9px 16px; border-bottom: 1px solid #fafaf9; }
+  .setup-lst-item:last-of-type { border-bottom: none; }
+  .setup-lst-left { display: flex; align-items: flex-start; gap: 10px; flex: 1; min-width: 0; cursor: pointer; }
+  .setup-lst-item .lst-text { font-size: 13px; }
+  .setup-lst-item.done .lst-text { color: var(--faint); text-decoration: line-through; }
+  .setup-lst-item.done .lst-note { color: #d6d3d1; }
+  .cu-item { display: flex; align-items: flex-start; gap: 6px; padding: 5px 0; border-bottom: 1px solid #fafaf9; }
+  .cu-item:last-of-type { border-bottom: none; }
+  .cu-body { flex: 1; min-width: 0; }
+  .cu-text  { font-size: 13px; line-height: 1.4; color: var(--text); }
+  .cu-note  { font-size: 11px; color: var(--faint); margin-top: 1px; line-height: 1.3; }
+  .tick-sm { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; transition: all 0.15s; font-size: 9px; color: transparent; }
+  .lst-item.done .tick-sm { background: var(--green); border-color: var(--green); color: white; }
+  .tick-lg { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; transition: all 0.15s; font-size: 9px; color: transparent; }
+  .setup-lst-item.done .tick-lg { background: var(--green); border-color: var(--green); color: white; }
+  .del-btn { opacity: 0; width: 18px; height: 18px; border: none; background: none; color: var(--faint); cursor: pointer; font-size: 10px; padding: 0; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 3px; transition: opacity 0.15s, color 0.15s; margin-top: 2px; }
+  .lst-item:hover .del-btn, .setup-lst-item:hover .del-btn, .cu-item:hover .del-btn { opacity: 1; }
+  .del-btn:hover { color: var(--red); }
+  @media (hover: none) { .del-btn { opacity: 0.35; } }
+  .add-row { padding: 6px 0 8px; }
+  .add-btn { background: none; border: none; color: var(--faint); font-size: 11px; cursor: pointer; padding: 2px 0; transition: color 0.15s; }
+  .add-btn:hover { color: var(--blue); }
+  .add-input-row { display: flex; gap: 5px; align-items: center; padding: 5px 0 6px; }
+  .add-input { flex: 1; border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; font-size: 12px; outline: none; min-width: 0; background: var(--bg); }
+  .add-input:focus { border-color: var(--blue); background: white; }
+  .add-confirm { font-size: 11px; padding: 4px 10px; border-radius: 5px; border: none; background: var(--blue); color: white; cursor: pointer; white-space: nowrap; }
+  .add-cancel  { font-size: 11px; padding: 4px 8px;  border-radius: 5px; border: 1px solid var(--border); background: var(--bg); color: var(--muted); cursor: pointer; }
+  .setup-header { padding: 14px 16px 12px; border-bottom: 1px solid var(--border); }
+  .setup-header-top { display: flex; justify-content: space-between; align-items: baseline; }
+  .setup-count { font-size: 13px; color: var(--muted); }
+  .setup-bar-wrap { height: 5px; background: var(--bg); border-radius: 3px; overflow: hidden; margin-top: 10px; }
+  .setup-bar-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width 0.35s ease; }
   .bucket-block { margin-bottom: 11px; }
   .bucket-block:last-child { margin-bottom: 0; }
   .bucket-title { font-size: 11px; font-weight: 700; margin-bottom: 3px; }
@@ -168,58 +84,9 @@
   .bucket-title.trust   { color: var(--purple); }
   .bucket-title.offer   { color: var(--amber); }
   .bucket-desc { font-size: 11px; color: var(--muted); line-height: 1.45; }
-
-  .setup-header { padding: 14px 16px 12px; border-bottom: 1px solid var(--border); }
-  .setup-header-top { display: flex; justify-content: space-between; align-items: baseline; }
-  .setup-count { font-size: 13px; color: var(--muted); }
-  .setup-bar-wrap { height: 5px; background: var(--bg); border-radius: 3px; overflow: hidden; margin-top: 10px; }
-  .setup-bar-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width 0.35s ease; }
-
-  .setup-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 9px 16px;
-    border-bottom: 1px solid #fafaf9;
-    cursor: pointer;
-    transition: background 0.1s;
-  }
-  .setup-item:last-child { border-bottom: none; }
-  .setup-item:hover { background: #fafaf9; }
-  .setup-check {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-    transition: all 0.15s;
-    font-size: 9px;
-    color: transparent;
-  }
-  .setup-item.done .setup-check { background: var(--green); border-color: var(--green); color: white; }
-  .setup-item-text { font-size: 13px; line-height: 1.4; transition: color 0.15s; }
-  .setup-item.done .setup-item-text { color: var(--faint); text-decoration: line-through; }
-  .setup-item-note { font-size: 11px; color: var(--faint); margin-top: 2px; }
-  .setup-item.done .setup-item-note { color: #d6d3d1; }
-
-  .stage-group { padding: 12px 16px 6px; }
+  .stage-group { padding: 12px 16px 4px; }
   .stage-group:not(:last-child) { border-bottom: 1px solid var(--border); }
-  .stage-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--faint);
-    margin-bottom: 6px;
-  }
-  .stage-item { font-size: 13px; color: var(--text); padding: 5px 0; border-bottom: 1px solid #fafaf9; line-height: 1.4; }
-  .stage-item:last-child { border-bottom: none; }
-  .stage-item-note { font-size: 11px; color: var(--faint); margin-top: 1px; }
-
+  .stage-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); margin-bottom: 6px; }
   @media (max-width: 640px) {
     .rhythm-grid { grid-template-columns: 1fr; }
     .rhythm-col:not(:last-child) { border-right: none; border-bottom: 1px solid var(--border); }
@@ -228,140 +95,99 @@
 </head>
 <body>
 <div class="wrap">
-
   <div class="page-header">
     <h1>PNC Marketing</h1>
-    <div class="meta">
-      <span id="hdr-date"></span>
-      <span id="hdr-week"></span>
-    </div>
+    <div class="meta"><span id="hdr-date"></span><span id="hdr-week"></span></div>
   </div>
-
   <div class="card">
     <div class="card-head">
       <div class="card-title">Where am I?</div>
-      <div class="card-subtitle">Click once - active &nbsp;&#183;&nbsp; click again - complete &nbsp;&#183;&nbsp; click again - reset</div>
+      <div class="card-subtitle">Click once - active &nbsp;·&nbsp; click again - complete &nbsp;·&nbsp; click again - reset</div>
     </div>
-    <div class="stepper-wrap">
-      <div class="stepper" id="stepper"></div>
-    </div>
+    <div class="stepper-wrap"><div class="stepper" id="stepper"></div></div>
   </div>
-
   <div class="card">
     <div class="card-head">
       <div class="card-title">Daily rhythm</div>
-      <div class="card-subtitle">What belongs in each cadence - tick as you go, resets each week</div>
+      <div class="card-subtitle">Tick as you go - resets each week</div>
     </div>
     <div class="rhythm-grid">
-
       <div class="rhythm-col">
         <div class="rhythm-col-title">Daily</div>
-        <div class="rhythm-item" id="d1" onclick="toggleRhythm('d1')">
-          <div class="rhythm-tick">&#10003;</div>
-          <div class="rhythm-item-body">
-            <div class="rhythm-item-text">One piece of content created or scheduled</div>
-            <div class="rhythm-item-note">Feed post, reel, or stories</div>
-          </div>
-        </div>
-        <div class="rhythm-item" id="d2" onclick="toggleRhythm('d2')">
-          <div class="rhythm-tick">&#10003;</div>
-          <div class="rhythm-item-body">
-            <div class="rhythm-item-text">Respond to all DMs and comments</div>
-          </div>
-        </div>
-        <div class="rhythm-item" id="d3" onclick="toggleRhythm('d3')">
-          <div class="rhythm-tick">&#10003;</div>
-          <div class="rhythm-item-body">
-            <div class="rhythm-item-text">One proactive action</div>
-            <div class="rhythm-item-note">Warm lead message, lead magnet push, or intentional QEC conversation</div>
-          </div>
-        </div>
+        <div id="list-daily"></div>
       </div>
-
       <div class="rhythm-col">
         <div class="rhythm-col-title">Weekly</div>
-        <div class="rhythm-item" id="w1" onclick="toggleRhythm('w1')">
-          <div class="rhythm-tick">&#10003;</div>
-          <div class="rhythm-item-body"><div class="rhythm-item-text">4-5 posts across feed and stories</div></div>
-        </div>
-        <div class="rhythm-item" id="w2" onclick="toggleRhythm('w2')">
-          <div class="rhythm-tick">&#10003;</div>
-          <div class="rhythm-item-body"><div class="rhythm-item-text">Stories on at least 3-4 days</div></div>
-        </div>
-        <div class="rhythm-item" id="w3" onclick="toggleRhythm('w3')">
-          <div class="rhythm-tick">&#10003;</div>
-          <div class="rhythm-item-body">
-            <div class="rhythm-item-text">One hand-raiser post</div>
-            <div class="rhythm-item-note">"DM me if this is you" or "type PEAK"</div>
-          </div>
-        </div>
-        <div class="rhythm-item" id="w4" onclick="toggleRhythm('w4')">
-          <div class="rhythm-tick">&#10003;</div>
-          <div class="rhythm-item-body">
-            <div class="rhythm-item-text">Lead magnet pushed in stories</div>
-            <div class="rhythm-item-note">Link sticker to calorie calculator</div>
-          </div>
-        </div>
-        <div class="rhythm-item" id="w5" onclick="toggleRhythm('w5')">
-          <div class="rhythm-tick">&#10003;</div>
-          <div class="rhythm-item-body"><div class="rhythm-item-text">One warm contact messaged personally</div></div>
-        </div>
-        <div class="rhythm-item" id="w6" onclick="toggleRhythm('w6')">
-          <div class="rhythm-tick">&#10003;</div>
-          <div class="rhythm-item-body"><div class="rhythm-item-text">Podcast episode published or in production</div></div>
-        </div>
-        <div class="rhythm-item" id="w7" onclick="toggleRhythm('w7')">
-          <div class="rhythm-tick">&#10003;</div>
-          <div class="rhythm-item-body"><div class="rhythm-item-text">Content ratio checked</div></div>
-        </div>
+        <div id="list-weekly"></div>
       </div>
-
       <div class="rhythm-col">
         <div class="rhythm-col-title">Monthly</div>
-        <div class="bucket-block">
-          <div class="bucket-title attract">Attract - 60%</div>
-          <div class="bucket-desc">Named Moment posts, identity gap content, specific situations. Reaches people who don't follow you yet.</div>
-        </div>
-        <div class="bucket-block">
-          <div class="bucket-title trust">Build Trust - 30%</div>
-          <div class="bucket-desc">Opinion posts, evidence, case studies, Go Deeper content. Builds authority with existing followers.</div>
-        </div>
-        <div class="bucket-block">
-          <div class="bucket-title offer">Business / Offer - 10%</div>
-          <div class="bucket-desc">Peak Pathway content, direct offers, hand-raisers. Stories carry the selling load - this column stays lean.</div>
-        </div>
+        <div class="bucket-block"><div class="bucket-title attract">Attract - 60%</div><div class="bucket-desc">Named Moment posts, identity gap content, specific situations. Reaches people who don't follow you yet.</div></div>
+        <div class="bucket-block"><div class="bucket-title trust">Build Trust - 30%</div><div class="bucket-desc">Opinion posts, evidence, case studies, Go Deeper content. Builds authority with existing followers.</div></div>
+        <div class="bucket-block"><div class="bucket-title offer">Business / Offer - 10%</div><div class="bucket-desc">Peak Pathway content, direct offers, hand-raisers. Stories carry the selling load - this column stays lean.</div></div>
       </div>
-
     </div>
   </div>
-
   <div class="card">
     <div class="setup-header">
-      <div class="setup-header-top">
-        <div class="card-title">Setup progress</div>
-        <span class="setup-count" id="setup-count">0 of 11</span>
-      </div>
-      <div class="card-subtitle" style="margin-top:3px;">Stages 1-4 - one-time foundations, stays checked permanently</div>
-      <div class="setup-bar-wrap">
-        <div class="setup-bar-fill" id="setup-bar" style="width:0%"></div>
-      </div>
+      <div class="setup-header-top"><div class="card-title">Setup progress</div><span class="setup-count" id="setup-count">0 of 0</span></div>
+      <div class="card-subtitle" style="margin-top:3px;">Stages 1-4 - one-time foundations</div>
+      <div class="setup-bar-wrap"><div class="setup-bar-fill" id="setup-bar" style="width:0%"></div></div>
     </div>
-    <div id="setup-items"></div>
+    <div id="list-setup"></div>
   </div>
-
   <div class="card">
-    <div class="card-head">
-      <div class="card-title">Coming up</div>
-      <div class="card-subtitle">Stages 5-7 - work through these when the time is right</div>
-    </div>
-    <div id="coming-up"></div>
+    <div class="card-head"><div class="card-title">Coming up</div><div class="card-subtitle">Stages 5-7 - when the time is right</div></div>
+    <div id="list-upcoming"></div>
   </div>
-
 </div>
-
 <script>
 const KEY = 'pnc_v2';
-
+const DEFAULTS = {
+  daily: [
+    { id:'d1', text:'One piece of content created or scheduled', note:'Feed post, reel, or stories' },
+    { id:'d2', text:'Respond to all DMs and comments' },
+    { id:'d3', text:'One proactive action', note:'Warm lead message, lead magnet push, or intentional QEC conversation' },
+  ],
+  weekly: [
+    { id:'w1', text:'4-5 posts across feed and stories' },
+    { id:'w2', text:'Stories on at least 3-4 days' },
+    { id:'w3', text:'One hand-raiser post', note:'"DM me if this is you" or "type PEAK"' },
+    { id:'w4', text:'Lead magnet pushed in stories', note:'Link sticker to calorie calculator' },
+    { id:'w5', text:'One warm contact messaged personally' },
+    { id:'w6', text:'Podcast episode published or in production' },
+    { id:'w7', text:'Content ratio checked' },
+  ],
+  setup: [
+    { id:'pf1',  text:'Write Peak Pathway offer in plain language',   note:'30-second version - what it is, who it\'s for, what it costs, how to start' },
+    { id:'pf2',  text:'Update Instagram bio with locked one-liner' },
+    { id:'pf3',  text:'Update Facebook page bio' },
+    { id:'pf4',  text:'Update QEC materials to reflect new niche' },
+    { id:'pf5',  text:'Check cal.com booking link works',             note:'Professional confirmation email, easy to find from profile' },
+    { id:'pf6',  text:'Build one-page pitch',                         note:'Who you work with, transformation, what\'s included, cost, how to start' },
+    { id:'pf7',  text:'Set DM trigger keyword live',                  note:'PEAK / RUGBY / RESET - start using it in content' },
+    { id:'pf8',  text:'Write list of 20 warm contacts',               note:'Former clients, engaged followers, QEC members, friends who fit the niche' },
+    { id:'pf9',  text:'Map out Phase 1 of Peak Pathway week by week' },
+    { id:'pf10', text:'Confirm delivery stack is ready',              note:'Everfit, Notion, Stripe, Zoom - dry run before first client starts' },
+    { id:'pf11', text:'Write onboarding sequence',                    note:'What happens day 1, day 3, day 7' },
+  ],
+  upcoming_groups: [
+    { label: 'Stage 5 - Month 2 - Once GA4 shows calculator traffic', items: [
+      { id:'u1', text:'Build 4-email follow-up sequence for calculator', note:'Problem - why attempts failed - Peak Pathway logic - destination + the door' },
+      { id:'u2', text:'Message every calculator download within 24h', note:'Conversational, no pitch - open a thread' },
+    ]},
+    { label: 'Stage 6 - Month 3+', items: [
+      { id:'u3', text:'Identify niche-specific lead magnet', note:'Options: The Lapsed Sportsman Audit / Couch to Hyrox guide / The Weekend Wreckage Fix' },
+      { id:'u4', text:'Build and launch it' },
+      { id:'u5', text:'Update bio link and run a launch campaign' },
+    ]},
+    { label: 'Stage 7 - Month 3-4', items: [
+      { id:'u6', text:'Identify and contact 5 local referral partners', note:'Physios first, then sports clubs and GPs - frame as collaboration' },
+      { id:'u7', text:'Run free talk at QEC: "Why you keep starting over"', note:'Open to members, one hour' },
+      { id:'u8', text:'Ask every client for a testimonial at their best win moment', note:'Not at programme end - at the moment something shifted' },
+    ]},
+  ]
+};
 const STAGES = [
   { n:1, label:'Lock foundations',      tag:'Week 1'        },
   { n:2, label:'Get visible',           tag:'Week 1+'       },
@@ -371,174 +197,114 @@ const STAGES = [
   { n:6, label:'Lead magnet',           tag:'Month 3+'      },
   { n:7, label:'Referrals',             tag:'Month 3-4'     },
 ];
-
-const SETUP_ITEMS = [
-  { id:'pf1',  text:'Write Peak Pathway offer in plain language',   note:'30-second version - what it is, who it\'s for, what it costs, how to start' },
-  { id:'pf2',  text:'Update Instagram bio with locked one-liner' },
-  { id:'pf3',  text:'Update Facebook page bio' },
-  { id:'pf4',  text:'Update QEC materials to reflect new niche' },
-  { id:'pf5',  text:'Check cal.com booking link works',             note:'Professional confirmation email, easy to find from profile' },
-  { id:'pf6',  text:'Build one-page pitch',                         note:'Who you work with, transformation, what\'s included, cost, how to start' },
-  { id:'pf7',  text:'Set DM trigger keyword live',                  note:'PEAK / RUGBY / RESET - start using it in content' },
-  { id:'pf8',  text:'Write list of 20 warm contacts',               note:'Former clients, engaged followers, QEC members, friends who fit the niche' },
-  { id:'pf9',  text:'Map out Phase 1 of Peak Pathway week by week' },
-  { id:'pf10', text:'Confirm delivery stack is ready',              note:'Everfit, Notion, Stripe, Zoom - dry run before first client starts' },
-  { id:'pf11', text:'Write onboarding sequence',                    note:'What happens day 1, day 3, day 7' },
-];
-
-const COMING_UP = [
-  {
-    label: 'Stage 5 - Month 2 - Once GA4 shows calculator traffic',
-    items: [
-      { text:'Build 4-email follow-up sequence for calculator', note:'Problem - why attempts failed - Peak Pathway logic - destination + the door' },
-      { text:'Message every calculator download within 24h',    note:'Conversational, no pitch - open a thread' },
-    ]
-  },
-  {
-    label: 'Stage 6 - Month 3+',
-    items: [
-      { text:'Identify niche-specific lead magnet',             note:'Options: The Lapsed Sportsman Audit / Couch to Hyrox guide / The Weekend Wreckage Fix' },
-      { text:'Build and launch it' },
-      { text:'Update bio link and run a launch campaign' },
-    ]
-  },
-  {
-    label: 'Stage 7 - Month 3-4',
-    items: [
-      { text:'Identify and contact 5 local referral partners',      note:'Physios first, then sports clubs and GPs - frame as collaboration' },
-      { text:'Run free talk at QEC: "Why you keep starting over"',  note:'Open to members, one hour' },
-      { text:'Ask every client for a testimonial at their best win moment', note:'Not at programme end - at the moment something shifted' },
-    ]
-  },
-];
-
-const RHYTHM_IDS = ['d1','d2','d3','w1','w2','w3','w4','w5','w6','w7'];
-
 function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } }
 function save(s) { localStorage.setItem(KEY, JSON.stringify(s)); }
-
-function weekKey() {
-  const d = new Date(), j = new Date(d.getFullYear(), 0, 1);
-  return `${d.getFullYear()}-W${Math.ceil(((d - j) / 864e5 + j.getDay() + 1) / 7)}`;
+function weekKey() { const d = new Date(), j = new Date(d.getFullYear(), 0, 1); return `${d.getFullYear()}-W${Math.ceil(((d-j)/864e5+j.getDay()+1)/7)}`; }
+function seedDefaults(s) {
+  if (s._seeded) return;
+  s.items_daily  = JSON.parse(JSON.stringify(DEFAULTS.daily));
+  s.items_weekly = JSON.parse(JSON.stringify(DEFAULTS.weekly));
+  s.items_setup  = JSON.parse(JSON.stringify(DEFAULTS.setup));
+  DEFAULTS.upcoming_groups.forEach((g, i) => { s['items_upcoming_' + i] = JSON.parse(JSON.stringify(g.items)); });
+  s._seeded = true;
 }
-
 function autoReset(s) {
   const wk = weekKey();
-  if (s._wk && s._wk !== wk) RHYTHM_IDS.forEach(id => delete s[id]);
+  if (s._wk && s._wk !== wk) [...(s.items_daily||[]),...(s.items_weekly||[])].forEach(i => delete s[i.id]);
   s._wk = wk;
-  return s;
 }
-
+function deleteItem(listKey, id) { const s=load(); s[listKey]=(s[listKey]||[]).filter(i=>i.id!==id); delete s[id]; save(s); renderAll(); }
+function addItem(listKey, text) { const s=load(); (s[listKey]=s[listKey]||[]).push({id:'c_'+Date.now(),text:text.trim()}); save(s); renderAll(); }
+function toggleTick(itemId) { const s=load(); s[itemId]=!s[itemId]; save(s); const el=document.getElementById('item-'+itemId); if(el) el.classList.toggle('done',!!s[itemId]); }
+function toggleSetupTick(itemId) { const s=load(); s[itemId]=!s[itemId]; save(s); renderSetupList(s); }
+function makeDelBtn(listKey, id) {
+  const btn=document.createElement('button'); btn.className='del-btn'; btn.innerHTML='&#10005;'; btn.title='Remove';
+  btn.onclick=e=>{e.stopPropagation();deleteItem(listKey,id);}; return btn;
+}
+function makeAddRow(listKey) {
+  const row=document.createElement('div'); row.className='add-row';
+  const btn=document.createElement('button'); btn.className='add-btn'; btn.textContent='+ Add item';
+  btn.onclick=()=>{
+    row.innerHTML='';
+    const wrap=document.createElement('div'); wrap.className='add-input-row';
+    const input=document.createElement('input'); input.className='add-input'; input.type='text'; input.placeholder='Add item...';
+    const ok=document.createElement('button'); ok.className='add-confirm'; ok.textContent='Add';
+    const can=document.createElement('button'); can.className='add-cancel'; can.textContent='Cancel';
+    const doAdd=()=>{const t=input.value.trim(); if(t) addItem(listKey,t); else renderAll();};
+    input.addEventListener('keydown',e=>{if(e.key==='Enter')doAdd();if(e.key==='Escape')renderAll();});
+    ok.onclick=doAdd; can.onclick=()=>renderAll();
+    wrap.append(input,ok,can); row.appendChild(wrap); input.focus();
+  };
+  row.appendChild(btn); return row;
+}
+function renderRhythmList(containerId, listKey) {
+  const s=load(), items=s[listKey]||[], el=document.getElementById(containerId);
+  el.innerHTML='';
+  items.forEach(item=>{
+    const div=document.createElement('div'); div.className='lst-item'+(s[item.id]?' done':''); div.id='item-'+item.id;
+    const left=document.createElement('div'); left.className='lst-left'; left.onclick=()=>toggleTick(item.id);
+    const tick=document.createElement('div'); tick.className='tick-sm'; tick.innerHTML='&#10003;';
+    const body=document.createElement('div'); body.innerHTML=`<div class="lst-text">${item.text}</div>${item.note?`<div class="lst-note">${item.note}</div>`:''}`);
+    left.append(tick,body); div.append(left,makeDelBtn(listKey,item.id)); el.appendChild(div);
+  });
+  el.appendChild(makeAddRow(listKey));
+}
+function renderSetupList(s) {
+  s=s||load(); const items=s.items_setup||[], el=document.getElementById('list-setup');
+  el.innerHTML=''; let done=0;
+  items.forEach(item=>{
+    if(s[item.id]) done++;
+    const div=document.createElement('div'); div.className='setup-lst-item'+(s[item.id]?' done':''); div.id='item-'+item.id;
+    const left=document.createElement('div'); left.className='setup-lst-left'; left.onclick=()=>toggleSetupTick(item.id);
+    const tick=document.createElement('div'); tick.className='tick-lg'; tick.innerHTML='&#10003;';
+    const body=document.createElement('div'); body.innerHTML=`<div class="lst-text">${item.text}</div>${item.note?`<div class="lst-note">${item.note}</div>`:''}`);
+    left.append(tick,body); div.append(left,makeDelBtn('items_setup',item.id)); el.appendChild(div);
+  });
+  const addWrap=document.createElement('div'); addWrap.style.padding='0 16px'; addWrap.appendChild(makeAddRow('items_setup')); el.appendChild(addWrap);
+  const total=items.length;
+  document.getElementById('setup-bar').style.width=(total?Math.round(done/total*100):0)+'%';
+  document.getElementById('setup-count').textContent=`${done} of ${total}`;
+}
+function renderUpcoming() {
+  const s=load(), el=document.getElementById('list-upcoming'); el.innerHTML='';
+  DEFAULTS.upcoming_groups.forEach((group,gi)=>{
+    const listKey='items_upcoming_'+gi, items=s[listKey]||[];
+    const grp=document.createElement('div'); grp.className='stage-group';
+    const lbl=document.createElement('div'); lbl.className='stage-label'; lbl.textContent=group.label;
+    grp.appendChild(lbl);
+    items.forEach(item=>{
+      const div=document.createElement('div'); div.className='cu-item';
+      const body=document.createElement('div'); body.className='cu-body';
+      body.innerHTML=`<div class="cu-text">${item.text}</div>${item.note?`<div class="cu-note">${item.note}</div>`:''}`);
+      div.append(body,makeDelBtn(listKey,item.id)); grp.appendChild(div);
+    });
+    grp.appendChild(makeAddRow(listKey)); el.appendChild(grp);
+  });
+}
 function renderStepper(s) {
-  const el = document.getElementById('stepper');
-  el.innerHTML = '';
-  STAGES.forEach((stage, i) => {
-    const state = s['stage_' + stage.n] || 'upcoming';
-    if (i > 0) {
-      const prev = s['stage_' + STAGES[i-1].n] || 'upcoming';
-      const conn = document.createElement('div');
-      conn.className = 'step-connector' + (prev === 'complete' ? ' done' : prev === 'active' ? ' in-progress' : '');
-      el.appendChild(conn);
-    }
-    const step = document.createElement('div');
-    step.className = 'step ' + state;
-    step.onclick = () => toggleStage(stage.n);
-    step.innerHTML = `
-      <div class="step-circle">${state === 'complete' ? '&#10003;' : stage.n}</div>
-      <div class="step-label">${stage.label}</div>
-      <div class="step-tag">${stage.tag}</div>`;
+  const el=document.getElementById('stepper'); el.innerHTML='';
+  STAGES.forEach((stage,i)=>{
+    const state=s['stage_'+stage.n]||'upcoming';
+    if(i>0){const prev=s['stage_'+STAGES[i-1].n]||'upcoming'; const conn=document.createElement('div'); conn.className='step-connector'+(prev==='complete'?' done':prev==='active'?' in-progress':''); el.appendChild(conn);}
+    const step=document.createElement('div'); step.className='step '+state; step.onclick=()=>toggleStage(stage.n);
+    step.innerHTML=`<div class="step-circle">${state==='complete'?'&#10003;':stage.n}</div><div class="step-label">${stage.label}</div><div class="step-tag">${stage.tag}</div>`;
     el.appendChild(step);
   });
 }
-
 function toggleStage(n) {
-  const s = load();
-  const key = 'stage_' + n;
-  const cur = s[key] || 'upcoming';
-  if (cur === 'upcoming') {
-    STAGES.forEach(st => { if (st.n !== n && s['stage_' + st.n] === 'active') s['stage_' + st.n] = 'upcoming'; });
-    for (let i = 1; i < n; i++) { if ((s['stage_' + i] || 'upcoming') !== 'complete') s['stage_' + i] = 'complete'; }
-    s[key] = 'active';
-  } else if (cur === 'active') {
-    s[key] = 'complete';
-  } else {
-    s[key] = 'upcoming';
-  }
+  const s=load(); const key='stage_'+n; const cur=s[key]||'upcoming';
+  if(cur==='upcoming'){STAGES.forEach(st=>{if(st.n!==n&&s['stage_'+st.n]==='active')s['stage_'+st.n]='upcoming';}); for(let i=1;i<n;i++){if((s['stage_'+i]||'upcoming')!=='complete')s['stage_'+i]='complete';} s[key]='active';}
+  else if(cur==='active'){s[key]='complete';} else{s[key]='upcoming';}
   save(s); renderStepper(s);
 }
-
-function applyRhythm(s) {
-  RHYTHM_IDS.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.toggle('done', !!s[id]);
-  });
-}
-
-function toggleRhythm(id) {
-  const s = load();
-  s[id] = !s[id];
-  save(s); applyRhythm(s);
-}
-
-function renderSetup(s) {
-  const el = document.getElementById('setup-items');
-  el.innerHTML = '';
-  let done = 0;
-  SETUP_ITEMS.forEach(item => {
-    if (s[item.id]) done++;
-    const div = document.createElement('div');
-    div.className = 'setup-item' + (s[item.id] ? ' done' : '');
-    div.onclick = () => toggleSetup(item.id);
-    div.innerHTML = `
-      <div class="setup-check">&#10003;</div>
-      <div>
-        <div class="setup-item-text">${item.text}</div>
-        ${item.note ? `<div class="setup-item-note">${item.note}</div>` : ''}
-      </div>`;
-    el.appendChild(div);
-  });
-  document.getElementById('setup-bar').style.width = Math.round(done / SETUP_ITEMS.length * 100) + '%';
-  document.getElementById('setup-count').textContent = `${done} of ${SETUP_ITEMS.length}`;
-}
-
-function toggleSetup(id) {
-  const s = load();
-  s[id] = !s[id];
-  save(s); renderSetup(s);
-}
-
-function renderComingUp() {
-  const wrap = document.getElementById('coming-up');
-  wrap.innerHTML = '';
-  COMING_UP.forEach(group => {
-    const grp = document.createElement('div');
-    grp.className = 'stage-group';
-    grp.innerHTML = `<div class="stage-label">${group.label}</div>`;
-    group.items.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'stage-item';
-      div.innerHTML = item.text + (item.note ? `<div class="stage-item-note">${item.note}</div>` : '');
-      grp.appendChild(div);
-    });
-    wrap.appendChild(grp);
-  });
-}
-
+function renderAll() { const s=load(); renderStepper(s); renderRhythmList('list-daily','items_daily'); renderRhythmList('list-weekly','items_weekly'); renderSetupList(s); renderUpcoming(); }
 function init() {
-  const s = autoReset(load());
-  save(s);
-  renderStepper(s);
-  applyRhythm(s);
-  renderSetup(s);
-  renderComingUp();
-  const now = new Date();
-  const d = document.getElementById('hdr-date');
-  if (d) d.textContent = now.toLocaleDateString('en-NZ', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-  const w = document.getElementById('hdr-week');
-  if (w) w.textContent = `Week ${weekKey().split('W')[1]}`;
+  const s=load(); seedDefaults(s); autoReset(s); save(s); renderAll();
+  const now=new Date();
+  const d=document.getElementById('hdr-date'); if(d) d.textContent=now.toLocaleDateString('en-NZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const w=document.getElementById('hdr-week'); if(w) w.textContent=`Week ${weekKey().split('W')[1]}`;
 }
-
 init();
-</script>
+<\/script>
 </body>
 </html>
