@@ -24,6 +24,8 @@
     --amber-light: #fef3c7;
     --blue: #2563eb;
     --blue-light: #dbeafe;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
     --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
   }
 
@@ -31,97 +33,102 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--bg);
     color: var(--text);
-    padding: 24px 16px 48px;
+    padding: 24px 20px 48px;
     min-height: 100vh;
   }
 
-  .wrap { max-width: 720px; margin: 0 auto; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
 
   /* Header */
-  .page-header { margin-bottom: 28px; }
+  .page-header { margin-bottom: 24px; }
   .page-header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
-  .page-header .meta { display: flex; gap: 16px; margin-top: 6px; flex-wrap: wrap; }
+  .page-header .meta { display: flex; gap: 16px; margin-top: 5px; flex-wrap: wrap; }
   .page-header .meta span { font-size: 13px; color: var(--muted); }
 
-  /* Section card */
+  /* Card */
   .card {
     background: var(--card);
     border-radius: 12px;
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
-    margin-bottom: 16px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .card-head {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    padding: 16px 20px 12px;
+    padding: 14px 16px 11px;
     border-bottom: 1px solid var(--border);
-    gap: 12px;
+    gap: 10px;
+    flex-shrink: 0;
   }
 
   .card-title {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
+    flex-wrap: wrap;
   }
 
+  .card-subtitle { font-size: 11px; color: var(--faint); margin-top: 3px; line-height: 1.4; }
+
   .badge {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
     border-radius: 20px;
     white-space: nowrap;
   }
-  .badge-green { background: var(--green-light); color: var(--green); }
-  .badge-amber { background: var(--amber-light); color: var(--amber); }
-  .badge-blue  { background: var(--blue-light);  color: var(--blue);  }
-  .badge-muted { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
-
-  .card-subtitle { font-size: 12px; color: var(--faint); margin-top: 2px; }
+  .badge-green  { background: var(--green-light);  color: var(--green); }
+  .badge-amber  { background: var(--amber-light);  color: var(--amber); }
+  .badge-blue   { background: var(--blue-light);   color: var(--blue); }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  .badge-muted  { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
 
   .reset-btn {
-    font-size: 12px;
-    padding: 5px 12px;
-    border-radius: 7px;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
     border: 1px solid var(--border);
     background: var(--bg);
     color: var(--muted);
     cursor: pointer;
     white-space: nowrap;
-    transition: background 0.15s, border-color 0.15s;
+    transition: background 0.15s;
     flex-shrink: 0;
+    margin-top: 1px;
   }
-  .reset-btn:hover { background: #e7e5e4; border-color: #d6d3d1; }
+  .reset-btn:hover { background: #e7e5e4; }
 
   /* Items */
-  .items { padding: 4px 0; }
+  .items { padding: 2px 0; flex: 1; }
 
   .item {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    padding: 10px 20px;
+    gap: 8px;
+    padding: 8px 14px;
     border-bottom: 1px solid #fafaf9;
     transition: background 0.1s;
   }
   .item:last-child { border-bottom: none; }
   .item:hover { background: #fafaf9; }
 
-  .btns { display: flex; gap: 4px; padding-top: 1px; flex-shrink: 0; }
+  .btns { display: flex; gap: 3px; padding-top: 1px; flex-shrink: 0; }
 
   .btn {
-    width: 26px;
-    height: 26px;
-    border-radius: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
     border: 1px solid var(--border);
     background: var(--card);
     cursor: pointer;
-    font-size: 12px;
+    font-size: 11px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,7 +136,7 @@
     color: var(--faint);
     flex-shrink: 0;
   }
-  .btn:hover { transform: scale(1.08); }
+  .btn:hover { transform: scale(1.1); }
   .btn-tick:hover  { background: var(--green-light);  border-color: var(--green-border);  color: var(--green); }
   .btn-cross:hover { background: var(--red-light);    border-color: var(--red-border);    color: var(--red); }
   .btn-tick.on  { background: var(--green-light);  border-color: var(--green-border);  color: var(--green); }
@@ -137,26 +144,30 @@
 
   .item-body { flex: 1; min-width: 0; }
   .item-text {
-    font-size: 14px;
-    line-height: 1.45;
+    font-size: 13px;
+    line-height: 1.4;
     transition: color 0.15s;
   }
   .item-text.done    { text-decoration: line-through; color: var(--faint); }
   .item-text.skipped { text-decoration: line-through; color: var(--red-border); }
 
   .item-note {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--faint);
     margin-top: 2px;
-    line-height: 1.4;
+    line-height: 1.35;
   }
   .item-note.done    { color: #d6d3d1; }
   .item-note.skipped { color: #fca5a5; }
 
   /* Progress */
-  .progress-wrap { padding: 10px 20px 14px; }
+  .progress-wrap {
+    padding: 8px 14px 12px;
+    flex-shrink: 0;
+    border-top: 1px solid #fafaf9;
+  }
   .progress-track {
-    height: 4px;
+    height: 3px;
     background: var(--bg);
     border-radius: 2px;
     overflow: hidden;
@@ -167,29 +178,37 @@
     border-radius: 2px;
     transition: width 0.35s ease;
   }
-  .progress-label { font-size: 12px; color: var(--faint); margin-top: 5px; }
+  .progress-label { font-size: 11px; color: var(--faint); margin-top: 4px; }
 
-  /* Stage group in upcoming */
-  .stage-group { padding: 14px 20px 4px; }
+  /* Layouts */
+  .full-row { margin-bottom: 14px; }
+
+  .col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+
+  /* Stage groups in upcoming */
+  .stage-group { padding: 12px 16px 4px; }
   .stage-group:not(:last-child) { border-bottom: 1px solid var(--border); }
   .stage-label {
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--faint);
     margin-bottom: 6px;
   }
 
-  /* Divider label between daily/weekly */
-  .section-divider {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--faint);
-    padding: 12px 20px 4px;
-    border-top: 1px solid var(--border);
+  /* Responsive */
+  @media (max-width: 720px) {
+    .col-grid { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 721px) and (max-width: 900px) {
+    .col-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -204,15 +223,15 @@
     </div>
   </div>
 
-  <!-- BEFORE YOU START -->
-  <div class="card" id="card-preflight">
+  <!-- BEFORE YOU START - full width -->
+  <div class="card full-row" id="card-preflight">
     <div class="card-head">
       <div>
         <div class="card-title">
           Before you start
           <span class="badge badge-amber" id="badge-preflight">0 / 11</span>
         </div>
-        <div class="card-subtitle">One-time setup — stays checked permanently</div>
+        <div class="card-subtitle">One-time setup - stays checked permanently</div>
       </div>
     </div>
     <div class="items" id="items-preflight"></div>
@@ -222,56 +241,73 @@
     </div>
   </div>
 
-  <!-- DAILY + WEEKLY (one card, week reset) -->
-  <div class="card" id="card-weekly">
-    <div class="card-head">
-      <div>
-        <div class="card-title">
-          This week
-          <span class="badge badge-blue" id="badge-weekly">0 done</span>
+  <!-- THREE COLUMNS -->
+  <div class="col-grid">
+
+    <!-- Daily -->
+    <div class="card" id="card-daily">
+      <div class="card-head">
+        <div>
+          <div class="card-title">
+            Daily habits
+            <span class="badge badge-blue" id="badge-daily">0 / 3</span>
+          </div>
+          <div class="card-subtitle">Tick as you go - resets weekly</div>
         </div>
-        <div class="card-subtitle">Daily habits and weekly non-negotiables — resets each week</div>
+        <button class="reset-btn" onclick="resetWeek()">New week</button>
       </div>
-      <button class="reset-btn" onclick="resetWeek()">New week</button>
+      <div class="items" id="items-daily"></div>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="bar-daily" style="width:0%"></div></div>
+        <div class="progress-label" id="lbl-daily"></div>
+      </div>
     </div>
 
-    <div class="section-divider">Daily habits</div>
-    <div class="items" id="items-daily"></div>
-
-    <div class="section-divider">Weekly non-negotiables</div>
-    <div class="items" id="items-weekly"></div>
-
-    <div class="progress-wrap">
-      <div class="progress-track"><div class="progress-fill" id="bar-weekly" style="width:0%"></div></div>
-      <div class="progress-label" id="lbl-weekly"></div>
+    <!-- Weekly -->
+    <div class="card" id="card-weekly">
+      <div class="card-head">
+        <div>
+          <div class="card-title">
+            This week
+            <span class="badge badge-blue" id="badge-weekly">0 / 7</span>
+          </div>
+          <div class="card-subtitle">Non-negotiables - resets weekly</div>
+        </div>
+      </div>
+      <div class="items" id="items-weekly"></div>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="bar-weekly" style="width:0%"></div></div>
+        <div class="progress-label" id="lbl-weekly"></div>
+      </div>
     </div>
+
+    <!-- Monthly -->
+    <div class="card" id="card-monthly">
+      <div class="card-head">
+        <div>
+          <div class="card-title">
+            Monthly ritual
+            <span class="badge badge-purple" id="badge-monthly">0 / 6</span>
+          </div>
+          <div class="card-subtitle">Sales system - resets monthly</div>
+        </div>
+        <button class="reset-btn" onclick="resetMonthly()">New month</button>
+      </div>
+      <div class="items" id="items-monthly"></div>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="bar-monthly" style="width:0%"></div></div>
+        <div class="progress-label" id="lbl-monthly"></div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- MONTHLY RITUAL -->
-  <div class="card" id="card-monthly">
-    <div class="card-head">
-      <div>
-        <div class="card-title">
-          Monthly ritual
-          <span class="badge badge-muted" id="badge-monthly">0 / 6</span>
-        </div>
-        <div class="card-subtitle">Sales system — resets each month</div>
-      </div>
-      <button class="reset-btn" onclick="resetMonthly()">New month</button>
-    </div>
-    <div class="items" id="items-monthly"></div>
-    <div class="progress-wrap">
-      <div class="progress-track"><div class="progress-fill" id="bar-monthly" style="width:0%"></div></div>
-      <div class="progress-label" id="lbl-monthly"></div>
-    </div>
-  </div>
-
-  <!-- COMING UP -->
-  <div class="card">
+  <!-- COMING UP - full width -->
+  <div class="card full-row">
     <div class="card-head">
       <div>
         <div class="card-title">Coming up</div>
-        <div class="card-subtitle">Future stages — work through these when the time is right</div>
+        <div class="card-subtitle">Future stages - work through these when the time is right</div>
       </div>
     </div>
     <div id="items-upcoming"></div>
@@ -282,90 +318,79 @@
 <script>
 const KEY = 'pnc_mkt_v1';
 
-/* ── DATA ───────────────────────────────────────────────────── */
-
 const PREFLIGHT = [
-  { id:'pf1',  text:'Write Peak Pathway offer in plain language',       note:'30-second version — what it is, who it\'s for, what it costs, how to start' },
+  { id:'pf1',  text:'Write Peak Pathway offer in plain language',   note:'30-second version - what it is, who it\'s for, what it costs, how to start' },
   { id:'pf2',  text:'Update Instagram bio with locked one-liner' },
   { id:'pf3',  text:'Update Facebook page bio' },
   { id:'pf4',  text:'Update QEC materials to reflect new niche' },
-  { id:'pf5',  text:'Check cal.com booking link works',                 note:'Professional confirmation email, easy to find from profile' },
-  { id:'pf6',  text:'Build one-page pitch',                             note:'Who you work with, transformation, what\'s included, cost, how to start' },
-  { id:'pf7',  text:'Set DM trigger keyword live',                      note:'PEAK / RUGBY / RESET — start using it in content' },
-  { id:'pf8',  text:'Write list of 20 warm contacts',                   note:'Former clients, engaged followers, QEC members, friends who fit the niche' },
+  { id:'pf5',  text:'Check cal.com booking link works',             note:'Professional confirmation email, easy to find from profile' },
+  { id:'pf6',  text:'Build one-page pitch',                         note:'Who you work with, transformation, what\'s included, cost, how to start' },
+  { id:'pf7',  text:'Set DM trigger keyword live',                  note:'PEAK / RUGBY / RESET - start using it in content' },
+  { id:'pf8',  text:'Write list of 20 warm contacts',               note:'Former clients, engaged followers, QEC members, friends who fit the niche' },
   { id:'pf9',  text:'Map out Phase 1 of Peak Pathway week by week' },
-  { id:'pf10', text:'Confirm delivery stack is ready',                  note:'Everfit, Notion, Stripe, Zoom — dry run before first client starts' },
-  { id:'pf11', text:'Write onboarding sequence',                        note:'What happens day 1, day 3, day 7' },
+  { id:'pf10', text:'Confirm delivery stack is ready',              note:'Everfit, Notion, Stripe, Zoom - dry run before first client starts' },
+  { id:'pf11', text:'Write onboarding sequence',                    note:'What happens day 1, day 3, day 7' },
 ];
 
 const DAILY = [
-  { id:'d1', text:'One piece of content created or scheduled',         note:'Feed post, reel, or stories — something out the door' },
+  { id:'d1', text:'One piece of content created or scheduled', note:'Feed post, reel, or stories - something out the door' },
   { id:'d2', text:'Responded to all DMs and comments' },
-  { id:'d3', text:'One proactive action',                              note:'Warm lead message / lead magnet push / intentional QEC conversation' },
+  { id:'d3', text:'One proactive action',                      note:'Warm lead message / lead magnet push / intentional QEC conversation' },
 ];
 
 const WEEKLY = [
-  { id:'w1', text:'4–5 posts live across feed and stories' },
-  { id:'w2', text:'Stories on at least 3–4 days this week' },
-  { id:'w3', text:'One hand-raiser post live',                         note:'"DM me if this is you" or "type PEAK in comments"' },
-  { id:'w4', text:'Lead magnet pushed in stories at least once',       note:'Link sticker to calorie calculator' },
+  { id:'w1', text:'4-5 posts live across feed and stories' },
+  { id:'w2', text:'Stories on at least 3-4 days this week' },
+  { id:'w3', text:'One hand-raiser post live',               note:'"DM me if this is you" or "type PEAK in comments"' },
+  { id:'w4', text:'Lead magnet pushed in stories',           note:'Link sticker to calorie calculator - at least once' },
   { id:'w5', text:'At least one warm contact messaged personally' },
   { id:'w6', text:'Podcast episode published or in production' },
-  { id:'w7', text:'Content ratio checked',                             note:'Last 12 posts — target 7 Attract / 4 Build Trust / 1 Convert' },
+  { id:'w7', text:'Content ratio checked',                   note:'Last 12 posts - target 7 Attract / 4 Build Trust / 1 Convert' },
 ];
 
 const MONTHLY = [
-  { id:'m1', text:'Week 1 — Go Deeper post live',                      note:'Deep dive into the mechanism — authority content, no pitch' },
-  { id:'m2', text:'Week 2 — Case Study post live',                     note:'Result first → starting point → specific tool → the moment it shifted → CTA' },
-  { id:'m3', text:'Week 3 — Short and Sweet post live',                note:'Direct: who you help, what result, "DM PEAK"' },
-  { id:'m4', text:'Week 4 — Ready Now Identifier post live',           note:'For the warm lead who keeps reading but hasn\'t moved — give them the nudge' },
-  { id:'m5', text:'New social proof added to library',                 note:'Screenshot a win, a message, a check-in moment — with permission' },
-  { id:'m6', text:'Content ratio audited',                             note:'Attract / Build Trust / Convert across last 12 posts' },
+  { id:'m1', text:'Week 1 - Go Deeper post live',            note:'Deep dive into the mechanism - authority content, no pitch' },
+  { id:'m2', text:'Week 2 - Case Study post live',           note:'Result first - starting point - specific tool - the moment it shifted - CTA' },
+  { id:'m3', text:'Week 3 - Short and Sweet post live',      note:'Direct: who you help, what result, "DM PEAK"' },
+  { id:'m4', text:'Week 4 - Ready Now Identifier post live', note:'For the warm lead who keeps reading but hasn\'t moved yet' },
+  { id:'m5', text:'New social proof added to library',       note:'Screenshot a win, a message, a check-in moment - with permission' },
+  { id:'m6', text:'Content ratio audited',                   note:'Attract / Build Trust / Convert across last 12 posts' },
 ];
 
 const UPCOMING = [
   {
-    label: 'Stage 5 — Month 2 · Once GA4 shows calculator traffic',
+    label: 'Stage 5 - Month 2 - Once GA4 shows calculator traffic',
     items: [
-      { id:'u1', text:'Build 4-email follow-up sequence for calculator', note:'Problem → why attempts failed → Peak Pathway logic → destination + the door' },
-      { id:'u2', text:'Message every calculator download within 24h',    note:'Conversational, no pitch — open a thread' },
+      { id:'u1', text:'Build 4-email follow-up sequence for calculator', note:'Problem - why attempts failed - Peak Pathway logic - destination + the door' },
+      { id:'u2', text:'Message every calculator download within 24h',    note:'Conversational, no pitch - open a thread' },
     ]
   },
   {
-    label: 'Stage 6 — Month 3+',
+    label: 'Stage 6 - Month 3+',
     items: [
-      { id:'u3', text:'Identify niche-specific lead magnet',             note:'Options: The Lapsed Sportsman Audit / Couch to Hyrox nutrition guide / The Weekend Wreckage Fix' },
+      { id:'u3', text:'Identify niche-specific lead magnet',             note:'Options: The Lapsed Sportsman Audit / Couch to Hyrox guide / The Weekend Wreckage Fix' },
       { id:'u4', text:'Build and launch it' },
-      { id:'u5', text:'Update bio link and run a launch campaign across content and stories' },
+      { id:'u5', text:'Update bio link and run a launch campaign' },
     ]
   },
   {
-    label: 'Stage 7 — Month 3–4',
+    label: 'Stage 7 - Month 3-4',
     items: [
-      { id:'u6', text:'Identify and contact 5 local referral partners',  note:'Physios first, then sports clubs and GPs — frame as collaboration, not referral ask' },
-      { id:'u7', text:'Run free talk at QEC: "Why you keep starting over"', note:'Open to members, one hour — warm your local audience' },
-      { id:'u8', text:'Ask every client for a testimonial at their best win moment', note:'Not at programme end — at the moment something actually shifted' },
+      { id:'u6', text:'Identify and contact 5 local referral partners',      note:'Physios first, then sports clubs and GPs - frame as collaboration' },
+      { id:'u7', text:'Run free talk at QEC: "Why you keep starting over"',  note:'Open to members, one hour' },
+      { id:'u8', text:'Ask every client for a testimonial at their best win moment', note:'Not at programme end - at the moment something shifted' },
     ]
   },
 ];
 
-/* ── STATE ──────────────────────────────────────────────────── */
-
-function load() {
-  try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
-  catch { return {}; }
-}
+function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } }
 function save(s) { localStorage.setItem(KEY, JSON.stringify(s)); }
 
 function weekKey() {
-  const d = new Date(), jan1 = new Date(d.getFullYear(), 0, 1);
-  const wk = Math.ceil(((d - jan1) / 864e5 + jan1.getDay() + 1) / 7);
-  return `${d.getFullYear()}-W${wk}`;
+  const d = new Date(), j = new Date(d.getFullYear(), 0, 1);
+  return `${d.getFullYear()}-W${Math.ceil(((d - j) / 864e5 + j.getDay() + 1) / 7)}`;
 }
-function monthKey() {
-  const d = new Date();
-  return `${d.getFullYear()}-${d.getMonth()}`;
-}
+function monthKey() { const d = new Date(); return `${d.getFullYear()}-${d.getMonth()}`; }
 
 function autoReset(s) {
   const wk = weekKey(), mo = monthKey();
@@ -381,18 +406,14 @@ function autoReset(s) {
   return s;
 }
 
-/* ── RENDER ─────────────────────────────────────────────────── */
-
-function makeItem(item, s, section) {
+function makeItem(item, s) {
   const st = s[item.id] || 'none';
   const div = document.createElement('div');
   div.className = 'item';
   div.innerHTML = `
     <div class="btns">
-      <button class="btn btn-tick ${st==='done'?'on':''}"
-        onclick="toggle('${item.id}','done','${section}')" title="Done">✓</button>
-      <button class="btn btn-cross ${st==='skip'?'on':''}"
-        onclick="toggle('${item.id}','skip','${section}')" title="Not done">✕</button>
+      <button class="btn btn-tick ${st==='done'?'on':''}" onclick="toggle('${item.id}','done')" title="Done">&#10003;</button>
+      <button class="btn btn-cross ${st==='skip'?'on':''}" onclick="toggle('${item.id}','skip')" title="Not done">&#10005;</button>
     </div>
     <div class="item-body">
       <div class="item-text ${st==='done'?'done':st==='skip'?'skipped':''}">${item.text}</div>
@@ -401,32 +422,27 @@ function makeItem(item, s, section) {
   return div;
 }
 
-function renderList(containerId, items, s, section) {
-  const el = document.getElementById(containerId);
+function renderList(id, items, s) {
+  const el = document.getElementById(id);
   if (!el) return;
   el.innerHTML = '';
-  items.forEach(i => el.appendChild(makeItem(i, s, section)));
+  items.forEach(i => el.appendChild(makeItem(i, s)));
 }
 
-function updateProgress(barId, lblId, badgeId, items, s, badgeStyle) {
-  const done  = items.filter(i => s[i.id] === 'done').length;
-  const skip  = items.filter(i => s[i.id] === 'skip').length;
+function updateProgress(barId, lblId, badgeId, items, s, color) {
+  const done = items.filter(i => s[i.id] === 'done').length;
+  const skip = items.filter(i => s[i.id] === 'skip').length;
   const total = items.length;
-  const pct   = total ? Math.round(done / total * 100) : 0;
-
+  const pct = total ? Math.round(done / total * 100) : 0;
   const bar = document.getElementById(barId);
   const lbl = document.getElementById(lblId);
   const bdg = document.getElementById(badgeId);
-
   if (bar) bar.style.width = pct + '%';
-  if (lbl) lbl.textContent = `${done} of ${total} done${skip ? ' · ' + skip + ' skipped' : ''}`;
+  if (lbl) lbl.textContent = `${done} of ${total} done${skip ? ' - ' + skip + ' skipped' : ''}`;
   if (bdg) {
     bdg.textContent = `${done} / ${total}`;
     bdg.className = 'badge';
-    if (pct === 100) bdg.classList.add('badge-green');
-    else if (badgeStyle === 'blue') bdg.classList.add('badge-blue');
-    else if (pct > 0) bdg.classList.add('badge-amber');
-    else bdg.classList.add('badge-muted');
+    bdg.classList.add(pct === 100 ? 'badge-green' : pct > 0 ? 'badge-amber' : color);
   }
 }
 
@@ -437,67 +453,51 @@ function renderUpcoming(s) {
   UPCOMING.forEach(stage => {
     const grp = document.createElement('div');
     grp.className = 'stage-group';
-    const lbl = document.createElement('div');
-    lbl.className = 'stage-label';
-    lbl.textContent = stage.label;
-    grp.appendChild(lbl);
-    const items = document.createElement('div');
-    items.className = 'items';
-    stage.items.forEach(i => items.appendChild(makeItem(i, s, 'upcoming')));
-    grp.appendChild(items);
+    grp.innerHTML = `<div class="stage-label">${stage.label}</div>`;
+    const list = document.createElement('div');
+    list.className = 'items';
+    stage.items.forEach(i => list.appendChild(makeItem(i, s)));
+    grp.appendChild(list);
     wrap.appendChild(grp);
   });
 }
 
 function renderAll() {
   const s = autoReset(load());
-
-  renderList('items-preflight', PREFLIGHT, s, 'preflight');
-  updateProgress('bar-preflight', 'lbl-preflight', 'badge-preflight', PREFLIGHT, s, 'amber');
-
-  renderList('items-daily',  DAILY,  s, 'weekly');
-  renderList('items-weekly', WEEKLY, s, 'weekly');
-  const weekItems = [...DAILY, ...WEEKLY];
-  updateProgress('bar-weekly', 'lbl-weekly', 'badge-weekly', weekItems, s, 'blue');
-
-  renderList('items-monthly', MONTHLY, s, 'monthly');
-  updateProgress('bar-monthly', 'lbl-monthly', 'badge-monthly', MONTHLY, s, 'muted');
-
+  renderList('items-preflight', PREFLIGHT, s);
+  updateProgress('bar-preflight', 'lbl-preflight', 'badge-preflight', PREFLIGHT, s, 'badge-amber');
+  renderList('items-daily', DAILY, s);
+  updateProgress('bar-daily', 'lbl-daily', 'badge-daily', DAILY, s, 'badge-blue');
+  renderList('items-weekly', WEEKLY, s);
+  updateProgress('bar-weekly', 'lbl-weekly', 'badge-weekly', WEEKLY, s, 'badge-blue');
+  renderList('items-monthly', MONTHLY, s);
+  updateProgress('bar-monthly', 'lbl-monthly', 'badge-monthly', MONTHLY, s, 'badge-purple');
   renderUpcoming(s);
-
-  // Header
   const now = new Date();
-  const el = document.getElementById('hdr-date');
-  if (el) el.textContent = now.toLocaleDateString('en-NZ', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-  const wkEl = document.getElementById('hdr-week');
-  if (wkEl) wkEl.textContent = `Week ${weekKey().split('W')[1]}`;
+  const d = document.getElementById('hdr-date');
+  if (d) d.textContent = now.toLocaleDateString('en-NZ', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  const w = document.getElementById('hdr-week');
+  if (w) w.textContent = `Week ${weekKey().split('W')[1]}`;
 }
 
-/* ── ACTIONS ────────────────────────────────────────────────── */
-
-function toggle(id, action, section) {
+function toggle(id, action) {
   const s = load();
   s[id] = s[id] === action ? 'none' : action;
-  save(s);
-  renderAll();
+  save(s); renderAll();
 }
 
 function resetWeek() {
-  if (!confirm('Reset all daily and weekly items?')) return;
+  if (!confirm('Reset daily habits and weekly items?')) return;
   const s = load();
   [...DAILY, ...WEEKLY].forEach(i => delete s[i.id]);
-  delete s._wk;
-  save(s);
-  renderAll();
+  delete s._wk; save(s); renderAll();
 }
 
 function resetMonthly() {
-  if (!confirm('Reset all monthly ritual items?')) return;
+  if (!confirm('Reset monthly ritual?')) return;
   const s = load();
   MONTHLY.forEach(i => delete s[i.id]);
-  delete s._mo;
-  save(s);
-  renderAll();
+  delete s._mo; save(s); renderAll();
 }
 
 renderAll();
