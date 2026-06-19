@@ -303,7 +303,7 @@ function weekKey(){const d=new Date(),j=new Date(d.getFullYear(),0,1);return d.g
 
 function seedDefaults(s){
   if(!s._seeded){s.items_daily=JSON.parse(JSON.stringify(DEFAULTS.daily));s.items_weekly=JSON.parse(JSON.stringify(DEFAULTS.weekly));s._seeded=true;}
-  if(!s._seeded_stages){T1_STAGES.forEach(st=>{s['items_t1_'+st.n]=st.defaultTasks.map((t,i)=>({id:'t1_'+st.n+'_'+i,text:t}));});s._seeded_stages=true;}
+  if(!s._seeded_stages_v2){T1_STAGES.forEach(st=>{s['items_t1_'+st.n]=st.defaultTasks.map((t,i)=>({id:'t1_'+st.n+'_'+i,text:t}));});for(let i=1;i<=10;i++)delete s['stage_'+i];s._seeded_stages=true;s._seeded_stages_v2=true;}
   if(!s._seeded_track2){s.items_track2=JSON.parse(JSON.stringify(TRACK2_DEFAULTS));s._seeded_track2=true;}
   if(!s._seeded_oq){s.items_oq=JSON.parse(JSON.stringify(OQ_DEFAULTS));s._seeded_oq=true;}
 }
