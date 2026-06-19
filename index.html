@@ -226,40 +226,65 @@ const T1_STAGES=[
     'Update bio on all platforms (Instagram, Facebook, QEC)'
   ]},
   {n:2,label:'Programme Direction',tag:'After Stage 1',defaultTasks:[
+    'Write a one-paragraph description of your ideal client (age, lifestyle, specific situation)',
+    'Describe their day-to-day in their own words — what does the problem feel like for them?',
+    'List what they\'ve already tried and why it hasn\'t stuck',
     'Work through Ella\'s Skilled Coach Club problem pathway process',
     'Identify the 3 core problems your ideal client is stuck with',
-    'Define the transformation — what does "solved" look like for them?',
-    'Produce updated Canva PNC overview file',
-    'Confirm your one-sentence outcome promise for Peak Pathway'
+    'Write each problem in language your client would actually use, not coaching language',
+    'Identify the #1 villain — the real root cause underneath the surface problem',
+    'Write their Point A — where they are now, in specific tangible terms',
+    'Write their Point B — where they\'ll be after Peak Pathway, in specific tangible terms',
+    'Write your one-sentence transformation statement: "I help [who] go from [A] to [B] so they can [why]"',
+    'Update your Canva PNC overview file to reflect this direction',
+    'Name your unique method or approach',
+    'Confirm outcome promise in one sentence',
+    'Sense check: explain what you do to someone outside the industry in 10 seconds'
   ]},
   {n:3,label:'Audience & Trust',tag:'Alongside Stage 2',defaultTasks:[
-    'Define 3–4 content pillars aligned to your direction',
+    'Define 3–4 content pillars that flow directly from your problem pathway',
+    'Map out content types that speak to each problem',
+    'Audit your current followers — who already matches your ideal client?',
+    'Create a content bank of 10 post ideas aligned to your direction',
     'Commit to a consistent posting rhythm (feed + stories)',
     'Start intentional DM conversations with warm followers',
     'Build a habit of saving and sharing social proof as it lands'
   ]},
   {n:4,label:'Lead Magnet',tag:'Once direction is locked',defaultTasks:[
-    'Choose one lead magnet that speaks to your ideal client\'s #1 problem',
-    'Build and publish the lead magnet',
-    'Push it in stories and bio link',
-    'Personally follow up every download within 24h'
+    'Choose one lead magnet that speaks directly to your ideal client\'s #1 problem',
+    'Map out the content and structure of the lead magnet',
+    'Build and publish it',
+    'Create a landing page or bio link',
+    'Write 3–5 stories promoting it',
+    'Push it consistently in stories and bio link',
+    'Personally follow up every download within 24h',
+    'Track download numbers weekly'
   ]},
   {n:5,label:'Validation',tag:'Once lead magnet is live',defaultTasks:[
     'Run discovery calls with warm leads from your lead magnet',
+    'Document the language they use to describe their problems',
     'Take on first beta clients (paid or discounted)',
+    'Confirm your transformation statement holds up in real calls',
+    'Identify which problem resonates most from real conversations',
     'Collect testimonials and document wins',
-    'Refine your messaging based on real conversations'
+    'Refine your messaging based on what you\'re hearing'
   ]},
   {n:6,label:'Programme Build',tag:'Once validated',defaultTasks:[
+    'Set your price point',
     'Map out Peak Pathway week by week',
     'Confirm delivery stack (Everfit, Notion, Stripe, Zoom)',
+    'Build your sales page or offer document',
     'Write onboarding sequence for Day 1, Day 3, Day 7',
+    'Create client resources (check-ins, templates, guides)',
     'Build email nurture sequence for lead magnet downloads'
   ]},
   {n:7,label:'Scale',tag:'When traction confirmed',defaultTasks:[
+    'Define your monthly revenue target and reverse-engineer the client numbers',
     'Update bio link to feature best-performing entry point',
     'Run launch campaign',
     'Make one private offer per day to most-engaged warm lead',
+    'Build email sequence for best-performing lead magnet',
+    'Set up referral system for existing clients',
     'Test paid promotion on best-performing content'
   ]},
 ];
@@ -303,7 +328,7 @@ function weekKey(){const d=new Date(),j=new Date(d.getFullYear(),0,1);return d.g
 
 function seedDefaults(s){
   if(!s._seeded){s.items_daily=JSON.parse(JSON.stringify(DEFAULTS.daily));s.items_weekly=JSON.parse(JSON.stringify(DEFAULTS.weekly));s._seeded=true;}
-  if(!s._seeded_stages_v2){T1_STAGES.forEach(st=>{s['items_t1_'+st.n]=st.defaultTasks.map((t,i)=>({id:'t1_'+st.n+'_'+i,text:t}));});for(let i=1;i<=10;i++)delete s['stage_'+i];s._seeded_stages=true;s._seeded_stages_v2=true;}
+  if(!s._seeded_stages_v3){T1_STAGES.forEach(st=>{s['items_t1_'+st.n]=st.defaultTasks.map((t,i)=>({id:'t1_'+st.n+'_'+i,text:t}));});for(let i=1;i<=10;i++)delete s['stage_'+i];s._seeded_stages=true;s._seeded_stages_v2=true;s._seeded_stages_v3=true;}
   if(!s._seeded_track2){s.items_track2=JSON.parse(JSON.stringify(TRACK2_DEFAULTS));s._seeded_track2=true;}
   if(!s._seeded_oq){s.items_oq=JSON.parse(JSON.stringify(OQ_DEFAULTS));s._seeded_oq=true;}
 }
