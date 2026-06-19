@@ -101,6 +101,13 @@
   .del-btn:hover { color: var(--red); }
   @media (hover: none) { .del-btn { opacity: 0.35; } }
 
+  .reorder-btns { display: flex; flex-direction: column; gap: 1px; flex-shrink: 0; margin-top: 1px; }
+  .reorder-btn { opacity: 0; width: 18px; height: 14px; border: none; background: none; color: var(--faint); cursor: pointer; font-size: 9px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 3px; transition: opacity 0.15s, color 0.15s; line-height: 1; }
+  .lst-item:hover .reorder-btn, .st-item:hover .reorder-btn { opacity: 1; }
+  .reorder-btn:hover { color: var(--blue); }
+  .reorder-btn:disabled { opacity: 0.1 !important; cursor: default; color: var(--faint) !important; }
+  @media (hover: none) { .reorder-btn { opacity: 0.35; } }
+
   .add-row { padding: 6px 0 8px; }
   .add-btn { background: none; border: none; color: var(--faint); font-size: 11px; cursor: pointer; padding: 2px 0; transition: color 0.15s; }
   .add-btn:hover { color: var(--blue); }
@@ -317,6 +324,10 @@ function toggleStageTick(n,id){const s=load();s[id]=!s[id];save(s);renderStageCa
 function deleteStageItem(n,id){const s=load(),k='items_t1_'+n;s[k]=(s[k]||[]).filter(i=>i.id!==id);delete s[id];save(s);renderStageCards();}
 function addStageItem(n,text){const s=load(),k='items_t1_'+n;(s[k]=s[k]||[]).push({id:'c_'+Date.now(),text:text.trim()});save(s);renderStageCards();}
 
+function moveStageItem(n,id,dir){const s=load(),k='items_t1_'+n,arr=s[k]||[],idx=arr.findIndex(i=>i.id===id);if(idx<0)return;const ni=idx+dir;if(ni<0||ni>=arr.length)return;[arr[idx],arr[ni]]=[arr[ni],arr[idx]];s[k]=arr;save(s);renderStageCards();}
+function moveTrack2Item(id,dir){const s=load(),arr=s.items_track2||[],idx=arr.findIndex(i=>i.id===id);if(idx<0)return;const ni=idx+dir;if(ni<0||ni>=arr.length)return;[arr[idx],arr[ni]]=[arr[ni],arr[idx]];s.items_track2=arr;save(s);renderTrack2();}
+function moveRhythmItem(lk,id,dir){const s=load(),arr=s[lk]||[],idx=arr.findIndex(i=>i.id===id);if(idx<0)return;const ni=idx+dir;if(ni<0||ni>=arr.length)return;[arr[idx],arr[ni]]=[arr[ni],arr[idx]];s[lk]=arr;save(s);renderRhythm();}
+function makeReorderBtns(moveFn,id,idx,total){const wrap=document.createElement('div');wrap.className='reorder-btns';const u=document.createElement('button');u.className='reorder-btn';u.innerHTML='&#9650;';u.title='Move up';u.disabled=idx===0;u.onclick=e=>{e.stopPropagation();moveFn(id,-1);};const d=document.createElement('button');d.className='reorder-btn';d.innerHTML='&#9660;';d.title='Move down';d.disabled=idx===total-1;d.onclick=e=>{e.stopPropagation();moveFn(id,1);};wrap.append(u,d);return wrap;}
 function makeStageDelBtn(n,id){const b=document.createElement('button');b.className='del-btn';b.innerHTML='&#10005;';b.title='Remove';b.onclick=e=>{e.stopPropagation();deleteStageItem(n,id);};return b;}
 function makeStageAddRow(n){
   const outer=document.createElement('div');outer.className='st-add-wrap';
@@ -339,7 +350,7 @@ function renderStageCards(){
     info.innerHTML='<div class="stage-card-name">'+st.label+'</div><div class="stage-card-meta">Stage '+st.n+' &middot; '+st.tag+' '+pill+'</div>';
     head.append(circle,info);
     const body=document.createElement('div');
-    items.forEach(item=>{const done=!!s[item.id],row=document.createElement('div');row.className='st-item'+(done?' done':'');const left=document.createElement('div');left.className='st-left';left.onclick=()=>toggleStageTick(st.n,item.id);const tick=document.createElement('div');tick.className='tick-sm';tick.innerHTML='&#10003;';const txt=document.createElement('div');txt.className='st-text';txt.textContent=item.text;left.append(tick,txt);row.append(left,makeStageDelBtn(st.n,item.id));body.appendChild(row);});
+    items.forEach(item=>{const done=!!s[item.id],row=document.createElement('div');row.className='st-item'+(done?' done':'');const left=document.createElement('div');left.className='st-left';left.onclick=()=>toggleStageTick(st.n,item.id);const tick=document.createElement('div');tick.className='tick-sm';tick.innerHTML='&#10003;';const txt=document.createElement('div');txt.className='st-text';txt.textContent=item.text;left.append(tick,txt);row.append(left,makeReorderBtns((id,dir)=>moveStageItem(st.n,id,dir),item.id,items.indexOf(item),items.length),makeStageDelBtn(st.n,item.id));body.appendChild(row);});
     body.appendChild(makeStageAddRow(st.n));
     card.append(head,body);el.appendChild(card);
   });
@@ -360,7 +371,7 @@ function renderTrack2(){
     const body=document.createElement('div');body.innerHTML='<div class="lst-text">'+item.text+'</div>'+(item.note?'<div class="lst-note">'+item.note+'</div>':'');
     left.append(tick,body);
     const del=document.createElement('button');del.className='del-btn';del.innerHTML='&#10005;';del.title='Remove';del.onclick=e=>{e.stopPropagation();deleteTrack2Item(item.id);};
-    div.append(left,del);el.appendChild(div);
+    div.append(left,makeReorderBtns((id,dir)=>moveTrack2Item(id,dir),item.id,items.indexOf(item),items.length),del);el.appendChild(div);
   });
   const addRow=document.createElement('div');addRow.className='add-row';
   const addBtn=document.createElement('button');addBtn.className='add-btn';addBtn.textContent='+ Add item';
@@ -393,7 +404,7 @@ function makeAddRow(lk){
 }
 function renderRhythmList(cid,lk){
   const s=load(),items=s[lk]||[],el=document.getElementById(cid);el.innerHTML='';
-  items.forEach(item=>{const div=document.createElement('div');div.className='lst-item'+(s[item.id]?' done':'');div.id='item-'+item.id;const left=document.createElement('div');left.className='lst-left';left.onclick=()=>toggleTick(item.id);const tick=document.createElement('div');tick.className='tick-sm';tick.innerHTML='&#10003;';const body=document.createElement('div');body.innerHTML='<div class="lst-text">'+item.text+'</div>'+(item.note?'<div class="lst-note">'+item.note+'</div>':'');left.append(tick,body);div.append(left,makeDelBtn(lk,item.id));el.appendChild(div);});
+  items.forEach(item=>{const div=document.createElement('div');div.className='lst-item'+(s[item.id]?' done':'');div.id='item-'+item.id;const left=document.createElement('div');left.className='lst-left';left.onclick=()=>toggleTick(item.id);const tick=document.createElement('div');tick.className='tick-sm';tick.innerHTML='&#10003;';const body=document.createElement('div');body.innerHTML='<div class="lst-text">'+item.text+'</div>'+(item.note?'<div class="lst-note">'+item.note+'</div>':'');left.append(tick,body);div.append(left,makeReorderBtns((id,dir)=>moveRhythmItem(lk,id,dir),item.id,items.indexOf(item),items.length),makeDelBtn(lk,item.id));el.appendChild(div);});
   el.appendChild(makeAddRow(lk));
 }
 
